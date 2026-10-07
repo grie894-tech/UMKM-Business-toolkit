@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UMKM Business Toolkit — Kelola Usaha Kecil dari Satu Layar</title>
+  <meta name="description" content="Aplikasi gratis untuk UMKM: catat produk, hitung HPP, buat nota, catat buku kas, dan lihat laporan keuntungan. Langsung jalan di browser, tanpa daftar.">
+  <meta property="og:title" content="UMKM Business Toolkit">
+  <meta property="og:description" content="Produk, HPP, nota, buku kas, dan laporan usaha dalam satu aplikasi gratis di browser.">
+  <meta property="og:image" content="assets/images/app-dashboard.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f766e'/%3E%3Cpath d='M7 12h18l-2-5H9z' fill='%23fff'/%3E%3Cpath d='M9 15v10h14V15' stroke='%23fff' stroke-width='2.4' fill='none'/%3E%3Cpath d='M12 22l3-3 2 2 3-4' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <!-- Font (jika offline, otomatis memakai font bawaan sistem) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#top" class="logo" aria-label="UMKM Business Toolkit, kembali ke atas">
+        <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="currentColor"/>
+          <path d="M8 15h24l-2.6-6.5H10.6z" fill="#fff"/>
+          <path d="M8 15c0 2.2 1.8 3.6 4 3.6s4-1.4 4-3.6c0 2.2 1.8 3.6 4 3.6s4-1.4 4-3.6c0 2.2 1.8 3.6 4 3.6s4-1.4 4-3.6" stroke="#fff" stroke-width="1.6" fill="none"/>
+          <path d="M11 20.5V31h18V20.5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+          <path d="M14.5 27.5l3.5-3.5 2.5 2.5 4-4.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">UMKM <strong>Toolkit</strong></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navigasi utama">
+        <a href="#fitur">Fitur</a>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#keamanan">Data Aman</a>
+        <a href="#faq">FAQ</a>
+        <a href="app.html" class="btn btn-primary btn-sm nav-cta">Buka Aplikasi</a>
+      </nav>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Gratis · Tanpa daftar · Bisa offline</p>
+          <h1>Catatan usaha rapi, <span class="hl">untung</span> jadi kelihatan.</h1>
+          <p class="lead">
+            Satu aplikasi untuk produk, harga jual, nota, buku kas, dan laporan.
+            Dibuat untuk warung, home industry, dan toko kecil yang ingin berhenti
+            mencatat di buku tulis.
+          </p>
+          <div class="hero-actions">
+            <a href="app.html" class="btn btn-primary btn-lg">Mulai Gunakan Gratis</a>
+            <a href="#fitur" class="btn btn-ghost btn-lg">Lihat Fitur</a>
+          </div>
+          <ul class="hero-points">
+            <li>Langsung jalan di browser HP atau laptop</li>
+            <li>Data tersimpan di perangkat Anda sendiri</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual">
+          <figure class="frame frame-desktop">
+            <div class="frame-bar"><i></i><i></i><i></i></div>
+            <img src="assets/images/app-dashboard.jpg" width="1600" height="1000"
+                 alt="Dashboard UMKM Business Toolkit menampilkan total pemasukan, pengeluaran, keuntungan, dan transaksi terakhir">
+          </figure>
+          <figure class="frame frame-phone">
+            <img src="assets/images/app-mobile.jpg" width="900" height="1948"
+                 alt="Tampilan dashboard di layar HP">
+          </figure>
+          <div class="float-card" aria-hidden="true">
+            <span class="float-label">Estimasi keuntungan</span>
+            <strong>Rp 2.176.000</strong>
+            <span class="float-up">Terhitung otomatis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STRIP NILAI ================= -->
+    <section class="strip" aria-label="Keunggulan singkat">
+      <div class="container strip-grid">
+        <div><strong>7 alat</strong><span>dalam satu aplikasi</span></div>
+        <div><strong>Rp 0</strong><span>tanpa biaya langganan</span></div>
+        <div><strong>0 server</strong><span>data tidak dikirim ke mana pun</span></div>
+        <div><strong>1 klik</strong><span>buka file, langsung dipakai</span></div>
+      </div>
+    </section>
+
+    <!-- ================= MASALAH ================= -->
+    <section class="section">
+      <div class="container narrow center">
+        <p class="eyebrow">Kenapa perlu?</p>
+        <h2>Banyak usaha ramai pembeli, tapi pemiliknya tidak tahu untungnya berapa.</h2>
+        <p class="muted-lg">
+          Harga jual ditebak, nota ditulis tangan, uang belanja bahan bercampur dengan uang dapur.
+          UMKM Business Toolkit membantu Anda mencatat dengan rapi tanpa harus paham akuntansi.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= FITUR (GRID) ================= -->
+    <section class="section section-alt" id="fitur">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Fitur</p>
+          <h2>Semua yang dibutuhkan usaha kecil, tanpa yang tidak perlu.</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature reveal">
+            <div class="f-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></div>
+            <h3>Dashboard</h3>
+            <p>Pemasukan, pengeluaran, estimasi keuntungan, dan transaksi terakhir langsung terlihat begitu aplikasi dibuka.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+            <h3>Produk & Stok</h3>
+            <p>Simpan harga modal, harga jual, dan stok. Produk yang hampir habis diberi tanda otomatis.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="f-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></div>
+            <h3>Kalkulator HPP</h3>
+            <p>Masukkan biaya bahan dan target untung, dapatkan HPP per unit dan harga jual yang masuk akal.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
+            <h3>Invoice / Nota</h3>
+            <p>Nota bernomor otomatis lengkap dengan logo dan alamat usaha. Preview, lalu cetak.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7l3-4h11v4"/><circle cx="16" cy="13.5" r="1.5"/></svg></div>
+            <h3>Buku Kas</h3>
+            <p>Catat uang masuk dan keluar per kategori. Filter per bulan untuk melihat saldo.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-6M13 17V7M18 17v-4"/></svg></div>
+            <h3>Laporan</h3>
+            <p>Grafik 6 bulan, produk terlaris, laba kotor per produk, dan pengeluaran per kategori.</p>
+          </article>
+          <article class="feature feature-wide reveal">
+            <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></div>
+            <div>
+              <h3>Pengaturan Bisnis</h3>
+              <p>Isi nama usaha, logo, alamat, nomor WhatsApp, dan slogan sekali saja. Semuanya otomatis muncul di setiap nota.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SOROTAN: NOTA ================= -->
+    <section class="section">
+      <div class="container split">
+        <div class="split-copy reveal">
+          <p class="eyebrow">Invoice / Nota</p>
+          <h2>Buat nota profesional dalam hitungan detik.</h2>
+          <p>Pilih pelanggan dan produk, harga terisi sendiri. Begitu disimpan, tiga hal terjadi sekaligus:</p>
+          <ol class="steps-inline">
+            <li><strong>Nomor nota</strong> dibuat otomatis, contoh <code>INV-20261023-001</code></li>
+            <li><strong>Stok produk</strong> berkurang sesuai jumlah yang dibeli</li>
+            <li><strong>Pemasukan</strong> langsung tercatat di Buku Kas</li>
+          </ol>
+          <p class="note">Nota bisa dicetak ke printer atau disimpan sebagai PDF lewat menu print browser.</p>
+        </div>
+        <figure class="shot shot-paper reveal">
+          <img src="assets/images/app-nota.jpg" width="1440" height="1038" loading="lazy"
+               alt="Contoh nota Dapur Bu Ani berisi dua produk dengan total Rp 276.000">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= SOROTAN: HPP ================= -->
+    <section class="section section-alt">
+      <div class="container split split-reverse">
+        <div class="split-copy reveal">
+          <p class="eyebrow">Kalkulator HPP & Harga Jual</p>
+          <h2>Berhenti menebak harga jual.</h2>
+          <p>Contoh: belanja bahan Rp 300.000, biaya kemasan dan gas Rp 60.000, menghasilkan 40 bungkus, target untung 40%.</p>
+          <div class="calc-demo">
+            <div><span>HPP per bungkus</span><strong>Rp 9.000</strong></div>
+            <div class="calc-main"><span>Harga jual rekomendasi</span><strong>Rp 12.600</strong></div>
+            <div><span>Untung satu produksi</span><strong>Rp 144.000</strong></div>
+          </div>
+          <p class="note">Hasilnya bisa langsung disimpan sebagai produk baru dengan satu klik.</p>
+        </div>
+        <figure class="shot reveal">
+          <img src="assets/images/app-kalkulator.jpg" width="1600" height="1000" loading="lazy"
+               alt="Halaman Kalkulator HPP menampilkan total modal, HPP per unit, dan harga jual rekomendasi">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= SOROTAN: LAPORAN ================= -->
+    <section class="section">
+      <div class="container split">
+        <div class="split-copy reveal">
+          <p class="eyebrow">Laporan</p>
+          <h2>Lihat usaha Anda tumbuh dari bulan ke bulan.</h2>
+          <ul class="checks">
+            <li>Grafik pemasukan dan pengeluaran 6 bulan terakhir</li>
+            <li>Produk paling laku beserta omzet dan laba kotornya</li>
+            <li>Pengeluaran terbesar per kategori, misalnya bahan baku atau kemasan</li>
+            <li>Filter per bulan untuk tutup buku</li>
+          </ul>
+        </div>
+        <figure class="shot reveal">
+          <img src="assets/images/app-laporan.jpg" width="1600" height="1000" loading="lazy"
+               alt="Halaman Laporan dengan grafik batang pemasukan dan pengeluaran enam bulan">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= CARA KERJA ================= -->
+    <section class="section section-dark" id="cara-kerja">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow eyebrow-light">Cara Kerja</p>
+          <h2>Empat langkah, lalu catatan berjalan sendiri.</h2>
+        </div>
+        <ol class="flow">
+          <li class="reveal">
+            <span class="flow-num">1</span>
+            <h3>Isi data usaha</h3>
+            <p>Nama, logo, alamat, dan WhatsApp di menu Pengaturan.</p>
+          </li>
+          <li class="reveal">
+            <span class="flow-num">2</span>
+            <h3>Masukkan produk</h3>
+            <p>Gunakan Kalkulator HPP untuk menentukan harga jualnya.</p>
+          </li>
+          <li class="reveal">
+            <span class="flow-num">3</span>
+            <h3>Buat nota saat ada pembeli</h3>
+            <p>Stok dan buku kas ikut diperbarui otomatis.</p>
+          </li>
+          <li class="reveal">
+            <span class="flow-num">4</span>
+            <h3>Pantau keuntungan</h3>
+            <p>Catat belanja di Buku Kas, cek hasilnya di Laporan.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= MOBILE + KEAMANAN ================= -->
+    <section class="section" id="keamanan">
+      <div class="container split split-reverse">
+        <div class="split-copy reveal">
+          <p class="eyebrow">Di HP maupun laptop</p>
+          <h2>Data usaha tetap di tangan Anda.</h2>
+          <p>Tidak ada akun, tidak ada server. Semua catatan disimpan di browser perangkat yang Anda pakai, jadi tidak ada orang lain yang bisa melihatnya.</p>
+          <ul class="checks">
+            <li>Tampilan menyesuaikan layar HP, tablet, dan komputer</li>
+            <li>Tetap bisa dipakai tanpa internet</li>
+            <li>Tidak ada iklan dan tidak ada biaya langganan</li>
+          </ul>
+          <p class="note">Perlu diingat: menghapus data browser (clear history/cache) juga menghapus catatan aplikasi. Gunakan satu browser yang sama.</p>
+        </div>
+        <figure class="phone-solo reveal">
+          <img src="assets/images/app-mobile.jpg" width="900" height="1948" loading="lazy"
+               alt="Dashboard UMKM Business Toolkit di layar HP">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="section section-alt" id="faq">
+      <div class="container narrow">
+        <div class="section-head center">
+          <p class="eyebrow">FAQ</p>
+          <h2>Pertanyaan yang sering muncul</h2>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Apakah benar-benar gratis?</summary>
+            <p>Ya. Aplikasi ini berjalan di browser Anda sendiri tanpa server, jadi tidak ada biaya langganan.</p>
+          </details>
+          <details>
+            <summary>Apakah perlu daftar atau login?</summary>
+            <p>Tidak. Buka aplikasinya dan langsung mulai mencatat.</p>
+          </details>
+          <details>
+            <summary>Di mana data saya disimpan?</summary>
+            <p>Di LocalStorage, yaitu penyimpanan bawaan browser di perangkat Anda. Data tidak dikirim ke internet.</p>
+          </details>
+          <details>
+            <summary>Kalau ganti HP, apakah data ikut pindah?</summary>
+            <p>Belum. Untuk versi ini data hanya ada di perangkat dan browser yang dipakai. Fitur backup dan pindah data direncanakan di versi berikutnya.</p>
+          </details>
+          <details>
+            <summary>Bagaimana cara mencetak nota?</summary>
+            <p>Buka nota lalu tekan "Cetak / Print". Anda bisa memilih printer atau "Simpan sebagai PDF" untuk dikirim lewat WhatsApp. Hasil paling rapi pada kertas A4 atau A5.</p>
+          </details>
+          <details>
+            <summary>Apakah cocok untuk usaha saya?</summary>
+            <p>Cocok untuk usaha kecil dengan produk yang jelas: makanan rumahan, oleh-oleh, warung, toko kelontong, kerajinan, atau reseller.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA AKHIR ================= -->
+    <section class="cta">
+      <div class="container cta-inner">
+        <h2>Mulai rapikan catatan usaha hari ini.</h2>
+        <p>Tidak perlu instal. Tidak perlu daftar. Cukup buka dan catat.</p>
+        <a href="app.html" class="btn btn-light btn-lg">Buka Aplikasi Sekarang</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="logo logo-footer">
+        <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="currentColor"/>
+          <path d="M8 15h24l-2.6-6.5H10.6z" fill="#fff"/>
+          <path d="M11 20.5V31h18V20.5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+          <path d="M14.5 27.5l3.5-3.5 2.5 2.5 4-4.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">UMKM <strong>Toolkit</strong></span>
+      </div>
+      <p>Alat bantu sederhana untuk usaha mikro, kecil, dan menengah di Indonesia.</p>
+      <p class="footer-small">&copy; <span id="year">2026</span> UMKM Business Toolkit · Dibuat dengan HTML, CSS &amp; JavaScript</p>
+    </div>
+  </footer>
+
+  <script src="landing.js"></script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  const PICK_CAPABILITIES = ["pick"];
+  const PICK_CHAIN_LENGTH = 4;
+  const PICK_MAX_TEXT_CHARS = 120;
+  const PICK_MAX_HTML_CHARS = 300;
+
+  function truncate(value, maxChars) {
+    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
+  }
+
+  function isPickableElement(element) {
+    return (
+      element instanceof Element &&
+      element !== document.documentElement &&
+      element !== document.body
+    );
+  }
+
+  function resolvePickTarget(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const element = document.elementFromPoint(x, y);
+    return isPickableElement(element) ? element.closest("svg") || element : null;
+  }
+
+  function pickLabel(element) {
+    if (element.id) return element.localName + "#" + element.id;
+    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
+  }
+
+  // Only attributes that help find the element in source. data-* values and URL
+  // query strings or fragments can carry tokens.
+  const PICK_ATTRIBUTES = new Set([
+    "id",
+    "class",
+    "name",
+    "type",
+    "role",
+    "alt",
+    "aria-label",
+    "href",
+    "src",
+  ]);
+
+  function pickAttributeValue(attribute) {
+    return attribute.name === "href" || attribute.name === "src"
+      ? attribute.value.split(/[?#]/)[0]
+      : attribute.value;
+  }
+
+  function describePickElement(element) {
+    const chain = [];
+    for (
+      let current = element;
+      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
+      current = current.parentElement
+    ) {
+      chain.unshift(current);
+    }
+    const attributes = Array.from(element.attributes)
+      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
+      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
+      .join("");
+    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    return {
+      chain: chain.map(pickLabel),
+      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
+      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
+    };
+  }
+
+  // Hover asks once per frame, and innerText on a large section forces layout,
+  // so only the rect is re-read while the pointer stays on the same element.
+  // Clicks ask for fresh details since the page may have changed the element.
+  let lastPick = null;
+
+  function describePickTarget(element, fresh) {
+    if (fresh || lastPick?.element !== element) {
+      lastPick = { element, details: describePickElement(element) };
+    }
+    const rect = element.getBoundingClientRect();
+    return {
+      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      ...lastPick.details,
+    };
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      capabilities: PICK_CAPABILITIES,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_PICK") {
+      const element = resolvePickTarget(event.data.x, event.data.y);
+      postToTrustedTop({
+        type: "INLINE_EDIT_PICK_RESULT",
+        seq: event.data.seq,
+        target: element ? describePickTarget(element, event.data.fresh === true) : null,
+      });
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+</script></body>
+</html>

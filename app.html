@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UMKM Business Toolkit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ================= SIDEBAR / NAVIGASI ================= -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-logo" id="brand-logo">U</div>
+        <div class="brand-text">
+          <div class="brand-name" id="brand-name">UMKM Toolkit</div>
+          <div class="brand-sub">Business Toolkit</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-link" data-page="dashboard">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-link" data-page="products">
+          <svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+          Produk
+        </button>
+        <button class="nav-link" data-page="calculator">
+          <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg>
+          Kalkulator HPP
+        </button>
+        <button class="nav-link" data-page="invoice">
+          <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+          Invoice / Nota
+        </button>
+        <button class="nav-link" data-page="cashbook">
+          <svg viewBox="0 0 24 24"><path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7l3-4h11v4"/><circle cx="16" cy="13.5" r="1.5"/></svg>
+          Buku Kas
+        </button>
+        <button class="nav-link" data-page="reports">
+          <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-6M13 17V7M18 17v-4"/></svg>
+          Laporan
+        </button>
+        <button class="nav-link" data-page="settings">
+          <svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+          Pengaturan
+        </button>
+        <a class="nav-link" href="index.html">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          Halaman Utama
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">Data tersimpan di browser ini (LocalStorage)</div>
+    </aside>
+
+    <!-- Lapisan gelap di belakang sidebar saat dibuka di HP -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ================= KONTEN UTAMA ================= -->
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Buka menu">&#9776;</button>
+        <h1 id="page-title">Dashboard</h1>
+      </header>
+
+      <div class="content">
+
+        <!-- ========== 1. DASHBOARD ========== -->
+        <section class="page" id="page-dashboard">
+          <div class="cards">
+            <div class="card stat">
+              <span class="stat-label">Total Pemasukan</span>
+              <strong class="stat-value text-green" id="dash-income">Rp 0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Total Pengeluaran</span>
+              <strong class="stat-value text-red" id="dash-expense">Rp 0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Estimasi Keuntungan</span>
+              <strong class="stat-value" id="dash-profit">Rp 0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Jumlah Produk</span>
+              <strong class="stat-value" id="dash-products">0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Jumlah Transaksi</span>
+              <strong class="stat-value" id="dash-transactions">0</strong>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-head">
+                <h2>Ringkasan Transaksi Terakhir</h2>
+                <button class="btn btn-light btn-sm" data-goto="cashbook">Lihat semua</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Tanggal</th><th>Tipe</th><th>Keterangan</th><th class="right">Nominal</th></tr>
+                  </thead>
+                  <tbody id="dash-recent"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <h2>Stok Menipis (&le; 5)</h2>
+                <button class="btn btn-light btn-sm" data-goto="products">Kelola</button>
+              </div>
+              <div id="dash-lowstock"></div>
+              <div class="quick-actions">
+                <button class="btn btn-primary" data-goto="invoice">+ Buat Nota</button>
+                <button class="btn btn-light" data-goto="cashbook">+ Catat Kas</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== 2. PRODUK ========== -->
+        <section class="page" id="page-products">
+          <div class="card">
+            <div class="toolbar">
+              <input type="search" id="product-search" placeholder="Cari nama produk...">
+              <button class="btn btn-primary" id="btn-add-product">+ Tambah Produk</button>
+            </div>
+            <p class="muted small" id="product-count">0 produk</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nama Produk</th>
+                    <th class="right">Harga Modal</th>
+                    <th class="right">Harga Jual</th>
+                    <th class="right">Untung / Unit</th>
+                    <th class="right">Stok</th>
+                    <th class="right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="product-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== 3. KALKULATOR HPP ========== -->
+        <section class="page" id="page-calculator">
+          <div class="grid-2">
+            <div class="card">
+              <h2>Input Biaya</h2>
+              <form id="calc-form" class="form">
+                <label>Harga Modal / Bahan Baku (Rp)
+                  <input type="number" id="calc-cost" min="0" placeholder="contoh: 100000">
+                  <small class="muted">Total biaya bahan untuk satu kali produksi.</small>
+                </label>
+                <label>Biaya Tambahan (Rp)
+                  <input type="number" id="calc-extra" min="0" placeholder="contoh: 20000">
+                  <small class="muted">Kemasan, gas, listrik, ongkos kirim bahan, dll.</small>
+                </label>
+                <label>Jumlah Produk yang Dihasilkan (unit)
+                  <input type="number" id="calc-qty" min="1" value="1">
+                </label>
+                <label>Target Keuntungan (%)
+                  <input type="number" id="calc-margin" min="0" value="30">
+                </label>
+                <button type="reset" class="btn btn-light" id="calc-reset">Reset</button>
+              </form>
+            </div>
+
+            <div class="card">
+              <h2>Hasil Perhitungan</h2>
+              <div class="result-list">
+                <div class="result-row"><span>Total Modal</span><strong id="calc-total">Rp 0</strong></div>
+                <div class="result-row"><span>HPP per Unit</span><strong id="calc-hpp">Rp 0</strong></div>
+                <div class="result-row highlight"><span>Harga Jual Rekomendasi</span><strong id="calc-price">Rp 0</strong></div>
+                <div class="result-row"><span>Untung per Unit</span><strong id="calc-profit-unit" class="text-green">Rp 0</strong></div>
+                <div class="result-row"><span>Estimasi Keuntungan Total</span><strong id="calc-profit-total" class="text-green">Rp 0</strong></div>
+              </div>
+              <p class="muted small">Harga jual rekomendasi dibulatkan ke atas ke kelipatan Rp 100.</p>
+              <button class="btn btn-primary" id="calc-save-product">Simpan sebagai Produk</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== 4. INVOICE / NOTA ========== -->
+        <section class="page" id="page-invoice">
+          <div class="card">
+            <h2>Buat Nota Baru</h2>
+            <div class="form-grid">
+              <label>Nomor Invoice
+                <input type="text" id="inv-number" readonly>
+              </label>
+              <label>Tanggal
+                <input type="date" id="inv-date">
+              </label>
+              <label class="full">Nama Pelanggan
+                <input type="text" id="inv-customer" placeholder="contoh: Bu Siti">
+              </label>
+            </div>
+
+            <div class="table-wrap">
+              <table class="items-table">
+                <thead>
+                  <tr><th>Produk</th><th>Jumlah</th><th>Harga (Rp)</th><th class="right">Subtotal</th><th></th></tr>
+                </thead>
+                <tbody id="inv-items"></tbody>
+              </table>
+            </div>
+            <button type="button" class="btn btn-light btn-sm" id="inv-add-row">+ Tambah Item</button>
+
+            <div class="inv-total">Total: <strong id="inv-total">Rp 0</strong></div>
+
+            <label class="block">Catatan (opsional)
+              <textarea id="inv-note" rows="2" placeholder="contoh: Lunas / Transfer BCA"></textarea>
+            </label>
+
+            <div class="actions">
+              <button type="button" class="btn btn-light" id="inv-reset">Reset</button>
+              <button type="button" class="btn btn-light" id="inv-preview">Preview</button>
+              <button type="button" class="btn btn-primary" id="inv-save">Simpan Nota</button>
+            </div>
+            <p class="muted small">Saat nota disimpan: stok produk berkurang dan total nota otomatis tercatat sebagai pemasukan di Buku Kas.</p>
+          </div>
+
+          <div class="card">
+            <h2>Riwayat Nota</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Nomor</th><th>Tanggal</th><th>Pelanggan</th><th class="right">Total</th><th class="right">Aksi</th></tr>
+                </thead>
+                <tbody id="inv-list"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== 5. BUKU KAS ========== -->
+        <section class="page" id="page-cashbook">
+          <div class="cards cards-3">
+            <div class="card stat">
+              <span class="stat-label">Pemasukan</span>
+              <strong class="stat-value text-green" id="cash-income">Rp 0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Pengeluaran</span>
+              <strong class="stat-value text-red" id="cash-expense">Rp 0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Saldo</span>
+              <strong class="stat-value" id="cash-balance">Rp 0</strong>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="toolbar">
+              <select id="cash-filter-type">
+                <option value="semua">Semua tipe</option>
+                <option value="masuk">Pemasukan</option>
+                <option value="keluar">Pengeluaran</option>
+              </select>
+              <input type="month" id="cash-filter-month" title="Filter bulan">
+              <button class="btn btn-light btn-sm" id="cash-filter-clear">Semua bulan</button>
+              <button class="btn btn-primary" id="btn-add-cash">+ Tambah Catatan</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Tanggal</th><th>Tipe</th><th>Kategori</th><th>Catatan</th><th class="right">Nominal</th><th class="right">Aksi</th></tr>
+                </thead>
+                <tbody id="cash-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== 6. LAPORAN ========== -->
+        <section class="page" id="page-reports">
+          <div class="card">
+            <div class="toolbar">
+              <label class="inline">Periode:
+                <input type="month" id="report-month">
+              </label>
+              <button class="btn btn-light btn-sm" id="report-all">Semua waktu</button>
+              <span class="muted small" id="report-period">Semua waktu</span>
+            </div>
+          </div>
+
+          <div class="cards">
+            <div class="card stat">
+              <span class="stat-label">Total Pemasukan</span>
+              <strong class="stat-value text-green" id="rep-income">Rp 0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Total Pengeluaran</span>
+              <strong class="stat-value text-red" id="rep-expense">Rp 0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Keuntungan</span>
+              <strong class="stat-value" id="rep-profit">Rp 0</strong>
+            </div>
+            <div class="card stat">
+              <span class="stat-label">Produk Terjual</span>
+              <strong class="stat-value" id="rep-sold">0</strong>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Pemasukan vs Pengeluaran (6 Bulan)</h2>
+            <div id="rep-chart"></div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <h2>Produk Terjual</h2>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Produk</th><th class="right">Qty</th><th class="right">Omzet</th><th class="right">Laba Kotor</th></tr>
+                  </thead>
+                  <tbody id="rep-products"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <h2>Pengeluaran per Kategori</h2>
+              <div id="rep-categories"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Riwayat Transaksi</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Tanggal</th><th>Tipe</th><th>Kategori</th><th>Catatan</th><th class="right">Nominal</th></tr>
+                </thead>
+                <tbody id="rep-history"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== 7. PENGATURAN ========== -->
+        <section class="page" id="page-settings">
+          <div class="grid-2">
+            <div class="card">
+              <h2>Informasi Bisnis</h2>
+              <form id="settings-form" class="form">
+                <label>Nama Bisnis
+                  <input type="text" id="set-name" placeholder="contoh: Dapur Bu Ani">
+                </label>
+                <label>Slogan
+                  <input type="text" id="set-slogan" placeholder="contoh: Enak, Sehat, Halal">
+                </label>
+                <label>Alamat
+                  <textarea id="set-address" rows="2" placeholder="Jl. Raya No. 1, Sampang"></textarea>
+                </label>
+                <label>Nomor WhatsApp
+                  <input type="tel" id="set-wa" placeholder="contoh: 081234567890">
+                </label>
+                <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
+              </form>
+            </div>
+
+            <div class="card">
+              <h2>Logo</h2>
+              <div class="logo-box">
+                <img id="set-logo-preview" alt="Preview logo" hidden>
+                <span id="set-logo-empty" class="muted">Belum ada logo</span>
+              </div>
+              <input type="file" id="set-logo" accept="image/*">
+              <p class="muted small">Format gambar (PNG/JPG). Maksimal 500 KB. Klik "Simpan Pengaturan" setelah memilih logo.</p>
+              <div class="actions">
+                <button type="button" class="btn btn-light btn-sm" id="set-logo-remove">Hapus Logo</button>
+                <button type="button" class="btn btn-light btn-sm" id="set-sample-invoice">Lihat Contoh Nota</button>
+              </div>
+
+              <hr>
+              <h2 class="text-red">Zona Berbahaya</h2>
+              <p class="muted small">Menghapus semua produk, nota, buku kas, dan pengaturan dari browser ini.</p>
+              <button type="button" class="btn btn-danger" id="set-reset-all">Hapus Semua Data</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ================= MODAL: PRODUK ================= -->
+  <div class="modal" id="modal-product">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="product-modal-title">Tambah Produk</h3>
+        <button type="button" class="modal-close" data-close aria-label="Tutup">&times;</button>
+      </div>
+      <form id="product-form" class="form">
+        <input type="hidden" id="product-id">
+        <label>Nama Produk
+          <input type="text" id="product-name" required>
+        </label>
+        <div class="form-grid">
+          <label>Harga Modal (Rp)
+            <input type="number" id="product-cost" min="0" required>
+          </label>
+          <label>Harga Jual (Rp)
+            <input type="number" id="product-price" min="0" required>
+          </label>
+          <label>Stok
+            <input type="number" id="product-stock" min="0" step="1" required>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-light" data-close>Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: BUKU KAS ================= -->
+  <div class="modal" id="modal-cash">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="cash-modal-title">Tambah Catatan Kas</h3>
+        <button type="button" class="modal-close" data-close aria-label="Tutup">&times;</button>
+      </div>
+      <form id="cash-form" class="form">
+        <input type="hidden" id="cash-id">
+        <div class="form-grid">
+          <label>Tipe
+            <select id="cash-type">
+              <option value="masuk">Pemasukan</option>
+              <option value="keluar">Pengeluaran</option>
+            </select>
+          </label>
+          <label>Tanggal
+            <input type="date" id="cash-date" required>
+          </label>
+          <label>Kategori
+            <input type="text" id="cash-category" list="cash-category-list" required placeholder="Pilih atau ketik">
+            <datalist id="cash-category-list"></datalist>
+          </label>
+          <label>Nominal (Rp)
+            <input type="number" id="cash-amount" min="1" required>
+          </label>
+        </div>
+        <label>Catatan
+          <textarea id="cash-note" rows="2" placeholder="contoh: Beli tepung 10 kg"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-light" data-close>Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: PREVIEW NOTA ================= -->
+  <div class="modal" id="modal-invoice">
+    <div class="modal-box modal-wide">
+      <div class="modal-head">
+        <h3>Preview Nota</h3>
+        <button type="button" class="modal-close" data-close aria-label="Tutup">&times;</button>
+      </div>
+      <div id="invoice-preview"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-light" data-close>Tutup</button>
+        <button type="button" class="btn btn-primary" id="inv-print">Cetak / Print</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Area khusus untuk print (hanya terlihat saat mencetak) -->
+  <div id="print-area"></div>
+
+  <!-- Notifikasi kecil -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ================= SCRIPT (urutan penting) ================= -->
+  <script src="modules/utils.js"></script>
+  <script src="modules/storage.js"></script>
+  <script src="modules/settings.js"></script>
+  <script src="modules/dashboard.js"></script>
+  <script src="modules/products.js"></script>
+  <script src="modules/calculator.js"></script>
+  <script src="modules/invoice.js"></script>
+  <script src="modules/cashbook.js"></script>
+  <script src="modules/reports.js"></script>
+  <script src="app.js"></script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  const PICK_CAPABILITIES = ["pick"];
+  const PICK_CHAIN_LENGTH = 4;
+  const PICK_MAX_TEXT_CHARS = 120;
+  const PICK_MAX_HTML_CHARS = 300;
+
+  function truncate(value, maxChars) {
+    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
+  }
+
+  function isPickableElement(element) {
+    return (
+      element instanceof Element &&
+      element !== document.documentElement &&
+      element !== document.body
+    );
+  }
+
+  function resolvePickTarget(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const element = document.elementFromPoint(x, y);
+    return isPickableElement(element) ? element.closest("svg") || element : null;
+  }
+
+  function pickLabel(element) {
+    if (element.id) return element.localName + "#" + element.id;
+    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
+  }
+
+  // Only attributes that help find the element in source. data-* values and URL
+  // query strings or fragments can carry tokens.
+  const PICK_ATTRIBUTES = new Set([
+    "id",
+    "class",
+    "name",
+    "type",
+    "role",
+    "alt",
+    "aria-label",
+    "href",
+    "src",
+  ]);
+
+  function pickAttributeValue(attribute) {
+    return attribute.name === "href" || attribute.name === "src"
+      ? attribute.value.split(/[?#]/)[0]
+      : attribute.value;
+  }
+
+  function describePickElement(element) {
+    const chain = [];
+    for (
+      let current = element;
+      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
+      current = current.parentElement
+    ) {
+      chain.unshift(current);
+    }
+    const attributes = Array.from(element.attributes)
+      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
+      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
+      .join("");
+    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    return {
+      chain: chain.map(pickLabel),
+      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
+      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
+    };
+  }
+
+  // Hover asks once per frame, and innerText on a large section forces layout,
+  // so only the rect is re-read while the pointer stays on the same element.
+  // Clicks ask for fresh details since the page may have changed the element.
+  let lastPick = null;
+
+  function describePickTarget(element, fresh) {
+    if (fresh || lastPick?.element !== element) {
+      lastPick = { element, details: describePickElement(element) };
+    }
+    const rect = element.getBoundingClientRect();
+    return {
+      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      ...lastPick.details,
+    };
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      capabilities: PICK_CAPABILITIES,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_PICK") {
+      const element = resolvePickTarget(event.data.x, event.data.y);
+      postToTrustedTop({
+        type: "INLINE_EDIT_PICK_RESULT",
+        seq: event.data.seq,
+        target: element ? describePickTarget(element, event.data.fresh === true) : null,
+      });
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+</script></body>
+</html>
